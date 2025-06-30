@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: JournalApp
+
+  data:
+    mongodb:
+      uri: mongodb+srv://adnanm:MdAdnan2k@cluster0.8jpd7gr.mongodb.net/journaldb?retryWrites=true&w=majority&appName=Cluster0
+      auto-index-creation: true
+
+  main:
+    allow-circular-references: true
+
+server:
+  port: 9090
