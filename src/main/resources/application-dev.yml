@@ -2,13 +2,31 @@ spring:
   application:
     name: JournalApp
 
+  main:
+    allow-circular-references: true
+
   data:
     mongodb:
       uri: mongodb+srv://adnanm:MdAdnan2k@cluster0.8jpd7gr.mongodb.net/journaldb?retryWrites=true&w=majority&appName=Cluster0
       auto-index-creation: true
 
-  main:
-    allow-circular-references: true
+    redis:
+      host: redis-11010.c326.us-east-1-3.ec2.redns.redis-cloud.com
+      port: 11010
+      password: ABtS13178KhcRMbF55doFwaIpBohXesO
+
+  mail:
+    subject: User Created for Journal App
+    host: smtp.gmail.com
+    port: 587
+    username: onlyadnancool11@gmail.com
+    password: iimb vxjr mshn qphk
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 server:
   port: 8081
@@ -18,3 +36,32 @@ logging:
     com:
       adnantech:
         journalApp: DEBUG
+
+weather:
+  api:
+    key: 08c039f57e39e6856e94e71e0b7acea4
+
+#kafka:
+#  bootstrap-servers: pkc-9q8rv.ap-south-2.aws.confluent.cloud:9092
+#  producer:
+#    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#  consumer:
+#    group-id: weekly-sentiment-group
+#    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#    value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#    properties:
+#      spring:
+#        json:
+#          trusted:
+#            packages: com.adnantech.journalApp.model
+#  properties:
+#    security:
+#      protocol: SASL_SSL
+#    sasl:
+#      mechanism: PLAIN
+#      jaas:
+#        config: org.apache.kafka.common.security.plain.PlainLoginModule required username='URV7AYAEGITJTKR6' password='bB75x8g2ZuFSbZWhpiivHRklKcJz1J91cPEdIEXp736SCcoVgs98KiCIY+yEpJ71';
+#    session:
+#      timeout:
+#        ms: 45000

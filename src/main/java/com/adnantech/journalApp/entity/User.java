@@ -14,15 +14,25 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     private ObjectId id;
     @Indexed(unique = true)
     @NonNull
     private String userName;
+    private String email;
+    private boolean sentimentAnalysis;
     @NonNull
     private String password;
     private List<String> roles;
     @DBRef
     private List<JournalEntry> journalEntries = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "UserName : " + userName + "\n"
+                + "Email : " + email + "\n"
+                + "SA : " + sentimentAnalysis;
+    }
 }

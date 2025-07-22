@@ -9,12 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 @Slf4j
 public class UserService {
 
@@ -23,17 +24,22 @@ public class UserService {
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public void saveNewUser(User user){
+    @Transactional
+    public boolean saveNewUser(User user){
+        boolean saved = false;
         try {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRoles(List.of("USER"));
             userRepository.save(user);
+            saved = true;
         } catch (Exception e){
             log.info("Dhunchak");
             log.error(e.getLocalizedMessage());
             log.warn("Warn Warn");
             log.debug("Debugged");
+            throw new RuntimeException("An error occurred while creating User.", e);
         }
+        return saved;
     }
 
     public void createAdmin(User user){
